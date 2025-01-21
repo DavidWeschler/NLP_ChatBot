@@ -12885,6 +12885,7 @@ where i am
 where i am now
 your position
 current position
+my current location
 here
 right here
 this spot
