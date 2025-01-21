@@ -12879,3 +12879,42 @@ karlan Peretz
 maccabim
 schick
 zevlodovitz
+your current location
+your location
+where i am
+where i am now
+your position
+current position
+here
+right here
+this spot
+this location
+your present location
+current place
+this place
+where im standing
+where im at
+near me
+around me
+around here
+this area
+this neighborhood
+your vicinity
+nearby
+in this area
+from where i am
+your gps location
+your coordinates
+your exact location
+your current coordinates
+your exact position
+here
+where I'm located
+where im located
+your current spot
+this point
+your whereabouts
+current whereabouts
+present position
+right where I am
+this current location
