@@ -135,7 +135,7 @@ class Bio_Tagger:
         return formatted_tags
 
 
-    def tag_bio(self, sentence):
+    def tag_bio(self, sentence, next_slot):
         # Initialize the dictionary to store BIO tags
         bio_tags = {
             'B-loca_start_num': [],
@@ -152,12 +152,6 @@ class Bio_Tagger:
         }
         tokens = self.preprocess_sentence(sentence)
         tokens, bio_tags = self.ends_with_sentence(tokens, bio_tags)
-
-        # Flags for state tracking
-        # in_start_location = False
-        # in_end_location = False
-        # in_difficulty = False
-        # digit_found = False
 
         i = 0
         while i < len(tokens):
@@ -223,9 +217,9 @@ class Bio_Tagger:
 
 
 
-# sentence = "I would like to run 5 km starting from my current location to hanevim 7 and make it very difficult."
 
 # sentences = [
+#     "I would like to run 5 km starting from my current location to hanevim 7 and make it very difficult.",
 #     "from my current location",
 #     "Show me a running path from downtown to ekrmh ben avi ghl",
 #     "i want to generate a route. 10 km long, starting from my location and very hard. should end at haneviim 37. lets go!",
@@ -241,12 +235,3 @@ class Bio_Tagger:
 #     # "Create a strenuous route beginning at the plaza ending at the hill viewpoint",
 #     # "Show me an easy running path that starts and ends at the mall",
 # ]
-
-# ------------------------------------------------------------------------------------------------  
-# for sentence in sentences:
-#     print(sentence)
-#     tokens = preprocess_sentence(sentence)
-#     bio_tags = tag_bio(start_location_keywords, end_location_keywords, difficulty_keywords, streets, tokens)
-#     bio_tags = format_bio_tags(bio_tags)
-#     print(bio_tags)
-#     print("---"*100)
