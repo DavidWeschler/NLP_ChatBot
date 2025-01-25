@@ -62,6 +62,7 @@ class Bio_Tagger:
             "this place",
             "where you are standing",
             "where you are at",
+            "where you currently are",
 
             # Immediate vicinity phrases
             "near you",
@@ -159,14 +160,17 @@ class Bio_Tagger:
         sentence = re.sub(r'\bim\b', "you are", sentence)
         sentence = re.sub(r'\bi\b', "you", sentence)
         sentence = re.sub(r'\bme\b', "you", sentence)
+        sentence = re.sub(r'\bam\b', "are", sentence)
         sentence = re.sub(r'\bfrom here\b', "from where you are", sentence)
         sentence = re.sub(r'\bto here\b', "to where you are", sentence)
+        sentence = re.sub(r'\bend here\b', "to where you are", sentence)
         sentence = re.sub(r'\bwant to\b', "want", sentence)
         sentence = re.sub(r'\bto run\b', "run", sentence)
         sentence = re.sub(r'\bto explore\b', "explore", sentence)
         sentence = re.sub(r'\bto generate\b', "generate", sentence)
         sentence = re.sub(r'\bto make\b', "make", sentence)
         sentence = re.sub(r'\bto recive\b', "recive", sentence)
+        sentence = re.sub(r'\blike to\b', "like", sentence)
         sentence = sentence.replace(" and ", " ")
         sentence = re.sub(r'\s+', ' ', sentence).strip()
         sentence = re.sub(r'(\d+)([a-zA-Z]+)', r'\1 \2', sentence)
@@ -176,6 +180,7 @@ class Bio_Tagger:
         sentence = sentence.translate(str.maketrans(chars_to_replace, ' ' * len(chars_to_replace)))
         sentence = re.sub(r'\s+', ' ', sentence).strip()
         sentence = sentence.translate(str.maketrans('', '', string.punctuation.replace('.', '')))
+
         return sentence
 
     def fill_difficulty(self, sentence, bio_tags):
@@ -237,7 +242,6 @@ class Bio_Tagger:
             bio_tags = self.append_to_start_location(location, bio_tags)
             sentence = sentence.replace(location, "")
             sucssus=True
-            # sentence, tokens = self.preprocess_sentence(sentence) ASK RON
             sentence = self.preprocess_sentence(sentence)
             return sucssus, sentence, bio_tags
 
@@ -245,11 +249,11 @@ class Bio_Tagger:
         location, _ = self.curr_location(sentence)
         if location:
             sentence = " ".join(sentence.split())
-            if sucssus or any(phrase+" "+location in sentence for phrase in ["ending at", "finishing at", "ends at", "finishes at", "to", "ending"]):
+            if sucssus or any(phrase+" "+location in sentence for phrase in ["ending at", "finishing at", "finish", "ends at", "end at", "finishes at", "finish at", "to", "ending"]):
                 bio_tags = self.append_to_end_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
-            elif any(phrase+" "+location in sentence for phrase in ["starting at", "begin at", "start at", "beginning at", "from", "starting"]) and not bio_tags['B-start_location']:
+            elif any(phrase+" "+location in sentence for phrase in ["starting at", "begin at", "start at", "beginning at", "from", "starting"]) and not bio_tags['B-start_location']: 
                 bio_tags = self.append_to_start_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
@@ -279,7 +283,7 @@ class Bio_Tagger:
                 bio_tags = self.append_to_start_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
-            elif any(phrase+" "+location in sentence for phrase in ["ending at", "finishing at", "ends at", "finishes at", "to", "ending"]) and not bio_tags['B-end_location']:
+            elif any(phrase+" "+location in sentence for phrase in ["ending at", "finish", "finishing at", "ends at", "end at", "finishes at", "finish at", "to", "ending"]) and not bio_tags['B-end_location']: 
                 bio_tags = self.append_to_end_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
@@ -321,7 +325,7 @@ class Bio_Tagger:
                             start_sucssus = True
                             bio_tags = self.append_to_start_location(st, bio_tags)
                             to_remove.append(st.split())
-                        elif (word in["to", "ending"] or " ".join(s[i-1:i+1]) in ["ending at", "finishing at", "ends at", "finishes at", "end at"]) and " ".join(s[i + 1:]).startswith(st) and not bio_tags['B-end_location']:
+                        elif (word in["to", "ending"] or " ".join(s[i-1:i+1]) in ["ending at", "finishing at", "ends at", "finishes at", "finish at", "end at"]) and " ".join(s[i + 1:]).startswith(st) and not bio_tags['B-end_location']:
                             end_sucssus = True
                             bio_tags = self.append_to_end_location(st, bio_tags)
                             to_remove.append(st)
