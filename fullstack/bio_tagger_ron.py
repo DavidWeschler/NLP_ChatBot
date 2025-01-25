@@ -128,7 +128,7 @@ class Bio_Tagger:
     def extract_street_names(self, sentence):
         nlp = spacy.load("en_core_web_sm")
         stopwords = {"to", "from", "near", "at", "on", "in", "and"}
-        regex_pattern = r'\b(?:to|from|near|at|on|in)\s((?:[a-z]+\s)*(?:\d+)|(?=\s\b(?:to|from|near|at|on|in|and)\b))'
+        regex_pattern = r'\b(?:to|from|near|at|on|in)\s((?:[a-z]+\s)*(?:\d+|street|st)|(?=\s\b(?:to|from|near|at|on|in|and)\b))'
         regex_matches = re.findall(regex_pattern, sentence)
 
         refined_matches = []
@@ -320,7 +320,7 @@ class Bio_Tagger:
             s= sentence.split()
             for st in ext_streets:
                 for i, word in enumerate(s):
-                    if(i>0 and i<len(s)-1):
+                    if(i<len(s)-1):
                         if (word in["from", "starting"] or " ".join(s[i-1:i+1]) in ["starting at", "begin at", "beginning at", "start at", "starts at", "begins at"]) and " ".join(s[i + 1:]).startswith(st) and not bio_tags['B-start_location']:
                             start_sucssus = True
                             bio_tags = self.append_to_start_location(st, bio_tags)
