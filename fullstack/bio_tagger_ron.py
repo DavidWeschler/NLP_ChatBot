@@ -27,6 +27,7 @@ class Bio_Tagger:
     def __init__(self, streets_file_path):
         self.difficulty_keywords = {
             "easy",
+            "medium",
             "moderate",
             "hard",
             "beginner",
@@ -376,7 +377,7 @@ class Bio_Tagger:
     def tag_bio(self, sentence, focus):
         if focus == None:
             focus = "all"
-        pretty_print(f"Focus: {focus}", "cyan")
+        # pretty_print(f"Focus: {focus}", "cyan")
         focus_dict = {
             "start_location": self.fill_start_location,
             "end_location": self.fill_end_location,
@@ -404,5 +405,5 @@ class Bio_Tagger:
         elif focus == "all":
             _, _, bio_tags = self.complete_rest(sentence, bio_tags)
 
-        pretty_print(f"Bio tags: {self.format_bio_tags(bio_tags)}", "magenta")
+        # pretty_print(f"Bio tags: {self.format_bio_tags(bio_tags)}", "magenta")
         return self.format_bio_tags(bio_tags)

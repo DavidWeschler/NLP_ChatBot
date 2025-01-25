@@ -25,24 +25,23 @@ def pretty_print(message, color):
 
 
 
-def wantToStartOver():
-    startOverUser = ["yes", "y", "yeah", "sure", "ok", "okay", "yup", "yea", "ya", "yep", "of course", "indeed", "absolutely", "definitely", "please", "start over", "try again", "restart", "reset"]
+def wantToContinue():
+    continueUser = ["yes", "y", "yeah", "sure", "ok", "okay", "yup", "yea", "ya", "yep", "of course", "indeed", "absolutely", "definitely", "please", "start over", "try again", "restart", "reset"]
     messages = [
-        "I seem to be having trouble understanding you. Would you like to start over?",
-        "Apologies, I’m having difficulty following. Do you want to start over?",
-        "I seem to be having trouble understanding you. Do you want to try again?",
-        "Apologies, I’m having difficulty following. Would you like to try again?",
-        "I seem to be having trouble understanding you. Do you want to restart?",
-        "Apologies, I’m having difficulty following. Would you like to restart?",
-        "I may not have understood completely. Do you want to reset?",
-        "I may not have understood completely. Would you like to reset?"
+        "I seem to be having trouble understanding you. Do you still want to continue?",
+        "Apologies, I’m having difficulty following. Do you want to keep going on?",
+        "I seem to be having trouble understanding you. Do you want to keep going?",
+        "Apologies, I’m having difficulty following. Would you like to keep on describing your route?",
+        "I seem to be having trouble understanding you. Do you still want to continue?",
+        "Apologies, I’m having difficulty following. Would you want to keep going on?",
+        "I may not have understood completely. Would you like to keep on describing your route?",
     ]
     print("Bot: ", random.choice(messages))
     user_input = input("User: ")
-    if user_input.lower() in startOverUser:
+    if user_input.lower() in continueUser:
         return True
     else:
-        for inp in startOverUser:
+        for inp in continueUser:
             if inp in user_input.lower():
                 return True
     return False
@@ -72,6 +71,17 @@ def generate_starting_message():
     ]
     return random.choice(messages)
 
+def generate_continue_message():
+    messages = [
+        'Okay, let’s continue. Please provide the details for your route.',
+        'Great! Let’s keep going. Please provide the remaining details for your route.',
+        'Alright, let’s proceed. Please continue by providing the necessary details for your route.',
+        'Understood! Let’s continue. Please provide the remaining details for your route.',
+        'Got it! Let’s keep moving forward. Please provide the remaining details for your route.',
+        'Sure, let’s continue. Please provide the details for your route.',
+        'Alright, let’s proceed. Please continue by providing the necessary details for your route.',
+    ]
+
 # main function to run the chatbot
 def main():
     # Initialize tracker and policy
@@ -85,8 +95,7 @@ def main():
     user_round = 0
     pretty_print("Bot: Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
     while not done:
-        try:
-            # pretty_print("User: ", "yellow")
+        # try:
             user_round += 1
             print("\033[33mYou: ", end="")
             user_input = input()
@@ -98,20 +107,18 @@ def main():
             user_round += 1
             if isDone:
                 return
-            if user_round > 10:
-                if wantToStartOver():
-                    tracker = Tracker()
-                    policy = Policy(tracker)
+            if user_round > 1:
+                if wantToContinue():
                     user_round = 0
                     next_slot = None
                     pretty_print(f"Bot: {generate_starting_message()}", "red")
                 else:
                     pretty_print(f"Bot: {generate_ending_message()}", "green")
                     return
-        except Exception as e:
-            pretty_print("Got an Error: " + str(e), "red")
-            pretty_print(f"Bot: {generate_ending_message()}", "green")
-            return
+        # except Exception as e:
+        #     pretty_print("Got an Error: " + str(e), "red")
+        #     pretty_print(f"Bot: {generate_ending_message()}", "green")
+        #     return
 
 # -------------------------------------------------
 main()
