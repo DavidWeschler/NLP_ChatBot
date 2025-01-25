@@ -9,34 +9,36 @@ class Tracker:
             "loca_start_num": None,
         }
 
-    @staticmethod
-    def update_slots(bio_tags, slots):
-        slot_values = {slot: [] for slot in slots.keys()}
-        current_slot = None  # Initialize `current_slot` outside the loop
+    def update_slots(self, bio_tags):
+        # example bio tags: Bio tags: [(4, 'B-route_length'), ('hi', 'O'), ('ther', 'O'), ('plan', 'O'), ('you', 'O'), ('a', 'O'), ('4', 'O'), ('k', 'O'), ('running', 'O'), ('route', 'O')]
         
-        for word, tag in bio_tags:
+        # first update all the B- tags
+        for val, tag in bio_tags:
             if tag.startswith("B-"):
-                current_slot = tag[2:]  # Extract slot name from "B-slot_name"
-                if current_slot in slot_values:
-                    slot_values[current_slot].append(word)
-            elif tag.startswith("I-") and current_slot:
-                slot_values[current_slot].append(word)
-            else:
-                current_slot = None
-        
-        # Join words and update slots
-        for slot, words in slot_values.items():
-            if words:
-                # slots[slot] = " ".join(words)
-                slots[slot] = " ".join(map(str, words))
-        
-        return slots
+                slot = tag.split("-")[1]    # e.g: route_length
+                self.slots[slot] = val
+
+        # then add all the I-tags
+        for val, tag in bio_tags:
+            if tag.startswith("I-"):
+                slot = tag.split("-")[1]    # e.g: start_location
+                if self.slots[slot] is not None:
+                    self.slots[slot] += " " + val
+                else:
+                    self.slots[slot] = val
+
+        return self.slots
 
     def update(self, bio_tags):
-        self.slots = self.update_slots(bio_tags, self.slots)
+        self.slots = self.update_slots(bio_tags)
     
     def is_complete(self):
         return all(value is not None for value in self.slots.values())
     
     def missing_slots(self):
         return [slot for slot, value in self.slots.items() if value is None]
+    
+    def print_slots(self):
+        for slot, value in self.slots.items():
+            print(f"{slot}: {value}", end=", ")
+            print('')
