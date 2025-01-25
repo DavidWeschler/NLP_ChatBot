@@ -51,19 +51,6 @@ def generate_starting_message():
     ]
     return random.choice(messages)
 
-def prepare_slot(slot):
-    if slot == None:
-        return "all"
-    if slot == "route_length":
-        return "route_length"
-    elif slot == "difficulty":
-        return "difficulty_lvl"
-    elif slot == "start_location":
-        return "start_loc"
-    elif slot == "end_location":
-        return "end_loc"
-    return slot
-
 # main function to run the chatbot
 def main():
     # Initialize tracker and policy
@@ -77,9 +64,8 @@ def main():
     user_round = 0
     print("Bot:", "Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!")
     while not done:
-        try:
-            next_slot = prepare_slot(next_slot)
-            print("Next slot to fill:", next_slot)
+        # try:
+            # print("Next slot to fill:", next_slot)
             user_input = input("User: ")
             user_input = bio_tagger.tag_bio(user_input, next_slot)
             tracker.update(user_input)
@@ -99,13 +85,11 @@ def main():
                 else:
                     print("Bot: ", generate_ending_message())
                     return
-        except Exception as e:
-            print("Got an Error: ", e)
-            print("Bot: ", "I'm sorry, I seem to be having trouble understanding you. Let me try to generate a route with the details I have so far.")
-            print("Bot: ", generate_ending_message())
-            return
+        # except Exception as e:
+        #     print("Got an Error: ", e)
+        #     print("Bot: ", "I'm sorry, I seem to be having trouble understanding you. Let me try to generate a route with the details I have so far.")
+        #     print("Bot: ", generate_ending_message())
+        #     return
 
 # -------------------------------------------------
 main()
-
-# def generate_starting_message():

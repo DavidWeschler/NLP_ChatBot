@@ -169,7 +169,14 @@ class Bio_Tagger:
                 bio_tags['B-difficulty'].append(token)
             elif token in self.difficulty_keywords and sucssus:
                 bio_tags['I-difficulty'].append(token)
-        return sucssus, sentence_1, bio_tags
+        
+        if "very" in bio_tags['B-difficulty'] and not bio_tags['I-difficulty']:
+            bio_tags['B-difficulty']=[]
+            bio_tags['I-difficulty']=[]
+        else:
+            for word in bio_tags['B-difficulty']+bio_tags['I-difficulty']:
+                sentence = sentence_1.replace(word, "")
+        return sucssus, sentence, bio_tags
 
     def append_to_start_location(self, st, bio_tags):
         full_st=st.split()
@@ -209,7 +216,8 @@ class Bio_Tagger:
             bio_tags = self.append_to_start_location(location, bio_tags)
             sentence = sentence.replace(location, "")
             sucssus=True
-            sentence, tokens = self.preprocess_sentence(sentence)
+            # sentence, tokens = self.preprocess_sentence(sentence) ASK RON
+            sentence = self.preprocess_sentence(sentence)
             return sucssus, sentence, bio_tags
 
         sucssus, _, bio_tags = self.fill_locations(1, sentence, bio_tags)
@@ -341,10 +349,13 @@ class Bio_Tagger:
         return False, tokens, bio_tags   
 
     def tag_bio(self, sentence, focus):
+        if focus == None:
+            focus = "all"
+        print("Focus: ", focus)
         focus_dict = {
-            "start_loc": self.fill_start_location,
-            "end_loc": self.fill_end_location,
-            "diffculty_lvl": self.fill_difficulty,
+            "start_location": self.fill_start_location,
+            "end_location": self.fill_end_location,
+            "difficulty": self.fill_difficulty,
             "route_length": self.fill_route_length,
         }
 
@@ -365,8 +376,8 @@ class Bio_Tagger:
         if focus in focus_dict:
             _, sentence, bio_tags = focus_dict[focus](sentence, bio_tags)
             _, _, bio_tags = self.complete_rest(sentence, bio_tags)
-            # sentence = remove_bio_tags_words(bio_tags, sentence)
         elif focus == "all":
             _, _, bio_tags = self.complete_rest(sentence, bio_tags)
 
+        print("Bio tags: ", self.format_bio_tags(bio_tags))
         return self.format_bio_tags(bio_tags)
