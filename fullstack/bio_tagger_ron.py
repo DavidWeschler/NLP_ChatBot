@@ -2,6 +2,27 @@ import re
 import string
 import spacy
 
+# denug function
+def pretty_print(message, color):
+    # Define ANSI escape codes for supported colors
+    colors = {
+        "black": "\033[30m",
+        "red": "\033[31m",
+        "green": "\033[32m",
+        "yellow": "\033[33m",
+        "blue": "\033[34m",
+        "magenta": "\033[35m",
+        "cyan": "\033[36m",
+        "white": "\033[37m",
+        "reset": "\033[0m"  # Reset to default
+    }
+
+    # Get the color code, default to reset if the color is not recognized
+    color_code = colors.get(color.lower(), colors["reset"])
+
+    # Print the message with the selected color
+    print(f"{color_code}{message}{colors['reset']}")
+
 class Bio_Tagger:
     def __init__(self, streets_file_path):
         self.difficulty_keywords = {
@@ -351,7 +372,7 @@ class Bio_Tagger:
     def tag_bio(self, sentence, focus):
         if focus == None:
             focus = "all"
-        print("Focus: ", focus)
+        pretty_print(f"Focus: {focus}", "cyan")
         focus_dict = {
             "start_location": self.fill_start_location,
             "end_location": self.fill_end_location,
@@ -379,5 +400,5 @@ class Bio_Tagger:
         elif focus == "all":
             _, _, bio_tags = self.complete_rest(sentence, bio_tags)
 
-        print("Bio tags: ", self.format_bio_tags(bio_tags))
+        pretty_print(f"Bio tags: {self.format_bio_tags(bio_tags)}", "magenta")
         return self.format_bio_tags(bio_tags)

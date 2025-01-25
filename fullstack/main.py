@@ -3,6 +3,27 @@ from policy import Policy
 from bio_tagger_ron import Bio_Tagger
 import random
 
+def pretty_print(message, color):
+    # Define ANSI escape codes for supported colors
+    colors = {
+        "black": "\033[30m",
+        "red": "\033[31m",
+        "green": "\033[32m",
+        "yellow": "\033[33m",
+        "blue": "\033[34m",
+        "magenta": "\033[35m",
+        "cyan": "\033[36m",
+        "white": "\033[37m",
+        "reset": "\033[0m"  # Reset to default
+    }
+
+    # Get the color code, default to reset if the color is not recognized
+    color_code = colors.get(color.lower(), colors["reset"])
+
+    # Print the message with the selected color
+    print(f"{color_code}{message}{colors['reset']}")
+
+
 
 def wantToStartOver():
     startOverUser = ["yes", "y", "yeah", "sure", "ok", "okay", "yup", "yea", "ya", "yep", "of course", "indeed", "absolutely", "definitely", "please", "start over", "try again", "restart", "reset"]
@@ -62,16 +83,18 @@ def main():
     done = False
     next_slot = None
     user_round = 0
-    print("Bot:", "Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!")
+    pretty_print("Bot: Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
     while not done:
-        # try:
-            # print("Next slot to fill:", next_slot)
-            user_input = input("User: ")
+        try:
+            # pretty_print("User: ", "yellow")
+            user_round += 1
+            print("\033[33mYou: ", end="")
+            user_input = input()
             user_input = bio_tagger.tag_bio(user_input, next_slot)
             tracker.update(user_input)
             msg, isDone, next_slot = policy.next_action(done)
             nlg_msg = "" + msg # get from guy here
-            print("Bot:", nlg_msg)
+            pretty_print(f"Bot: {nlg_msg}", "blue")
             user_round += 1
             if isDone:
                 return
@@ -81,15 +104,14 @@ def main():
                     policy = Policy(tracker)
                     user_round = 0
                     next_slot = None
-                    print("Bot: ", generate_starting_message())
+                    pretty_print(f"Bot: {generate_starting_message()}", "red")
                 else:
-                    print("Bot: ", generate_ending_message())
+                    pretty_print(f"Bot: {generate_ending_message()}", "green")
                     return
-        # except Exception as e:
-        #     print("Got an Error: ", e)
-        #     print("Bot: ", "I'm sorry, I seem to be having trouble understanding you. Let me try to generate a route with the details I have so far.")
-        #     print("Bot: ", generate_ending_message())
-        #     return
+        except Exception as e:
+            pretty_print("Got an Error: " + str(e), "red")
+            pretty_print(f"Bot: {generate_ending_message()}", "green")
+            return
 
 # -------------------------------------------------
 main()
