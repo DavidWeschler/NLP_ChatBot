@@ -27,7 +27,8 @@ class Tracker:
         # Join words and update slots
         for slot, words in slot_values.items():
             if words:
-                slots[slot] = " ".join(words)
+                # slots[slot] = " ".join(words)
+                slots[slot] = " ".join(map(str, words))
         
         return slots
 
