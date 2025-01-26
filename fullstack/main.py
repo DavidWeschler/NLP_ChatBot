@@ -3,13 +3,16 @@ from policy import Policy
 from bio_tagger import Bio_Tagger
 import random
 import time
+import sys
 import re
 
 botName = "Hadas: "
 userName = "You: "
 
 def suprise_func(
+    name,
     text,
+    color_code,
     base_speed=0.035,
     speed_variation=0.005,
     punctuation_pause=0.6,
@@ -18,6 +21,19 @@ def suprise_func(
     thinking_pause=0.7,
     flush=True
 ):
+    time.sleep(1)
+    for char in f"{color_code}{name} Thinking{"\033[0m"}":
+        print(char, end="", flush=True)
+        time.sleep(0.07)
+
+    for _ in range(random.randint(1, 3)):
+        for dots in [".", "..", "..."]:
+            print(f"{color_code}\r{name} Thinking{dots}  {"\033[0m"}", end="", flush=True)
+            time.sleep(0.5)
+    print(f"{color_code}\r{name}            {"\033[0m"}", end="", flush=True)
+    print(f"{color_code}\r{name}{"\033[0m"}", end="", flush=True)
+    time.sleep(0.35)
+
     punctuation = {',', ';', ':', '!', '?', '...', '(', ')'}
     sentences = re.split(r'(?<=\. )', text)
 
@@ -38,7 +54,7 @@ def suprise_func(
 
     print()
 
-def pretty_print(message, color):
+def pretty_print(name, message, color):
     colors = {
         "black": "\033[30m",
         "red": "\033[31m",
@@ -54,7 +70,7 @@ def pretty_print(message, color):
     color_code = colors.get(color.lower(), colors["reset"])
 
     # Print the message with the selected color
-    suprise_func(f"{color_code}{message}{colors['reset']}")
+    suprise_func(name, f"{color_code}{message}{colors['reset']}", color_code)
 
 
 def wantToContinue():
@@ -68,7 +84,7 @@ def wantToContinue():
         "Apologies, I’m having difficulty following. Would you want to keep going on?",
         "I may not have understood completely. Would you like to keep on describing your route?",
     ]
-    pretty_print(f"{botName}{random.choice(messages)}", "red")
+    pretty_print(botName, f"{random.choice(messages)}", "red")
     user_input = input(f"\033[35m{userName}").strip()
     if user_input.lower() in continueUser:
         return True
@@ -122,7 +138,7 @@ def main():
     policy = Policy(tracker)
     bio_tagger = Bio_Tagger("../street_scraping/final_streets.txt")
 
-    pretty_print(f"{botName}Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
+    pretty_print(botName, f"Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
 
     # Simulate chatbot flow
     done = False
@@ -141,9 +157,9 @@ def main():
                 if wantToContinue():
                     user_round = 0
                     next_slot = None
-                    pretty_print(f"{botName}{generate_continue_message()}", "blue")
+                    pretty_print(botName, f"{generate_continue_message()}", "blue")
                 else:
-                    pretty_print(f"{botName}{generate_ending_message()}", "green")
+                    pretty_print(botName, f"{generate_ending_message()}", "green")
                     return
                 
             # Process user input with the bio tagger
@@ -153,11 +169,11 @@ def main():
             # Get the bot's next action and response
             msg, done, next_slot = policy.next_action(done)
             nlg_msg = msg  # Placeholder for an NLG response generator
-            pretty_print(f"{botName}{nlg_msg}", "blue")
+            pretty_print(botName, f"{nlg_msg}", "blue")
 
         except Exception as e:
             pretty_print("Got an Error: " + str(e), "red")
-            pretty_print(f"{botName}{generate_ending_message()}", "green")
+            pretty_print(botName, f"{generate_ending_message()}", "green")
             return
 
 # -------------------------------------------------
