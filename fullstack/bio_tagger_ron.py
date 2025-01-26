@@ -129,7 +129,7 @@ class Bio_Tagger:
     def extract_street_names(self, sentence):
         nlp = spacy.load("en_core_web_sm")
         stopwords = {"to", "from", "near", "at", "on", "in", "and"}
-        regex_pattern = r'\b(?:to|from|near|at|on|in)\s((?:[a-z]+\s)*(?:\d+|street|st)|(?=\s\b(?:to|from|near|at|on|in|and)\b))'
+        regex_pattern = r'\b(?:to|from|near|at|on|in)\s((?:[a-z]+\s)*(?:\d+|street|neighborhood|avenue|district|st)|(?=\s\b(?:to|from|near|at|on|in|and)\b))'
         regex_matches = re.findall(regex_pattern, sentence)
 
         refined_matches = []
@@ -162,9 +162,10 @@ class Bio_Tagger:
         sentence = re.sub(r'\bi\b', "you", sentence)
         sentence = re.sub(r'\bme\b', "you", sentence)
         sentence = re.sub(r'\bam\b', "are", sentence)
-        sentence = re.sub(r'\bfrom here\b', "from where you are", sentence)
-        sentence = re.sub(r'\bto here\b', "to where you are", sentence)
-        sentence = re.sub(r'\bend here\b', "to where you are", sentence)
+        # sentence = re.sub(r'\bfrom here\b', "from where you are", sentence)
+        # sentence = re.sub(r'\bto here\b', "to where you are", sentence)
+        # sentence = re.sub(r'\bend here\b', "to where you are", sentence)
+        sentence = re.sub(r'\bhere\b', "where you are", sentence) ################
         sentence = re.sub(r'\bwant to\b', "want", sentence)
         sentence = re.sub(r'\bto run\b', "run", sentence)
         sentence = re.sub(r'\bto explore\b', "explore", sentence)
