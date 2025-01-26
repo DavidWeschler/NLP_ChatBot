@@ -1,10 +1,44 @@
 from tracker import Tracker
 from policy import Policy
-from bio_tagger_ron import Bio_Tagger
+from bio_tagger import Bio_Tagger
 import random
+import time
+import re
+
+botName = "Hadas: "
+userName = "You: "
+
+def suprise_func(
+    text,
+    base_speed=0.035,
+    speed_variation=0.005,
+    punctuation_pause=0.6,
+    word_pause_multiplier=0.3,
+    sentence_pause=0.6,
+    thinking_pause=0.7,
+    flush=True
+):
+    punctuation = {',', ';', ':', '!', '?', '...', '(', ')'}
+    sentences = re.split(r'(?<=\. )', text)
+
+    for sentence in sentences:
+        if random.random() < 0.1:
+            time.sleep(thinking_pause)
+
+        for char in sentence:
+            print(char, end='', flush=flush)
+            if char in punctuation:
+                time.sleep(punctuation_pause + random.uniform(0, speed_variation))
+            elif char == ' ':
+                time.sleep(base_speed * word_pause_multiplier + random.uniform(0, speed_variation / 2))
+            else:
+                time.sleep(base_speed)
+
+        time.sleep(sentence_pause + random.uniform(0, speed_variation))
+
+    print()
 
 def pretty_print(message, color):
-    # Define ANSI escape codes for supported colors
     colors = {
         "black": "\033[30m",
         "red": "\033[31m",
@@ -14,15 +48,13 @@ def pretty_print(message, color):
         "magenta": "\033[35m",
         "cyan": "\033[36m",
         "white": "\033[37m",
-        "reset": "\033[0m"  # Reset to default
+        "reset": "\033[0m"
     }
 
-    # Get the color code, default to reset if the color is not recognized
     color_code = colors.get(color.lower(), colors["reset"])
 
     # Print the message with the selected color
-    print(f"{color_code}{message}{colors['reset']}")
-
+    suprise_func(f"{color_code}{message}{colors['reset']}")
 
 
 def wantToContinue():
@@ -36,8 +68,8 @@ def wantToContinue():
         "Apologies, I’m having difficulty following. Would you want to keep going on?",
         "I may not have understood completely. Would you like to keep on describing your route?",
     ]
-    pretty_print(f"Rody: {random.choice(messages)}", "red")
-    user_input = input("\033[35mYou: ").strip()
+    pretty_print(f"{botName}{random.choice(messages)}", "red")
+    user_input = input(f"\033[35m{userName}").strip()
     if user_input.lower() in continueUser:
         return True
     else:
@@ -90,7 +122,7 @@ def main():
     policy = Policy(tracker)
     bio_tagger = Bio_Tagger("../street_scraping/final_streets.txt")
 
-    pretty_print("Rody: Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
+    pretty_print(f"{botName}Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
 
     # Simulate chatbot flow
     done = False
@@ -101,7 +133,7 @@ def main():
     while not done:
         try:
             # Get user input
-            user_input = input("\033[35mYou: ").strip()
+            user_input = input(f"\033[35m{userName}").strip()
             user_round += 1
 
             # Check if user wants to continue
@@ -109,9 +141,9 @@ def main():
                 if wantToContinue():
                     user_round = 0
                     next_slot = None
-                    pretty_print(f"Rody: {generate_continue_message()}", "blue")
+                    pretty_print(f"{botName}{generate_continue_message()}", "blue")
                 else:
-                    pretty_print(f"Rody: {generate_ending_message()}", "green")
+                    pretty_print(f"{botName}{generate_ending_message()}", "green")
                     return
                 
             # Process user input with the bio tagger
@@ -121,11 +153,11 @@ def main():
             # Get the bot's next action and response
             msg, done, next_slot = policy.next_action(done)
             nlg_msg = msg  # Placeholder for an NLG response generator
-            pretty_print(f"Rody: {nlg_msg}", "blue")
+            pretty_print(f"{botName}{nlg_msg}", "blue")
 
         except Exception as e:
             pretty_print("Got an Error: " + str(e), "red")
-            pretty_print(f"Rody: {generate_ending_message()}", "green")
+            pretty_print(f"{botName}{generate_ending_message()}", "green")
             return
 
 # -------------------------------------------------
