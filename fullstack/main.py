@@ -36,8 +36,8 @@ def wantToContinue():
         "Apologies, I’m having difficulty following. Would you want to keep going on?",
         "I may not have understood completely. Would you like to keep on describing your route?",
     ]
-    print("Bot: ", random.choice(messages))
-    user_input = input("User: ")
+    pretty_print(f"Rody: {random.choice(messages)}", "red")
+    user_input = input("\033[35mYou: ").strip()
     if user_input.lower() in continueUser:
         return True
     else:
@@ -81,6 +81,7 @@ def generate_continue_message():
         'Sure, let’s continue. Please provide the details for your route.',
         'Alright, let’s proceed. Please continue by providing the necessary details for your route.',
     ]
+    return random.choice(messages)
 
 # main function to run the chatbot
 def main():
@@ -89,36 +90,43 @@ def main():
     policy = Policy(tracker)
     bio_tagger = Bio_Tagger("../street_scraping/final_streets.txt")
 
+    pretty_print("Rody: Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
+
     # Simulate chatbot flow
     done = False
     next_slot = None
     user_round = 0
-    pretty_print("Bot: Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
+    max_rounds = 5  # Max rounds before asking to continue
+
     while not done:
-        # try:
+        try:
+            # Get user input
+            user_input = input("\033[35mYou: ").strip()
             user_round += 1
-            print("\033[33mYou: ", end="")
-            user_input = input()
-            user_input = bio_tagger.tag_bio(user_input, next_slot)
-            tracker.update(user_input)
-            msg, isDone, next_slot = policy.next_action(done)
-            nlg_msg = "" + msg # get from guy here
-            pretty_print(f"Bot: {nlg_msg}", "blue")
-            user_round += 1
-            if isDone:
-                return
-            if user_round > 1:
+
+            # Check if user wants to continue
+            if user_round > max_rounds:
                 if wantToContinue():
                     user_round = 0
                     next_slot = None
-                    pretty_print(f"Bot: {generate_starting_message()}", "red")
+                    pretty_print(f"Rody: {generate_continue_message()}", "blue")
                 else:
-                    pretty_print(f"Bot: {generate_ending_message()}", "green")
+                    pretty_print(f"Rody: {generate_ending_message()}", "green")
                     return
-        # except Exception as e:
-        #     pretty_print("Got an Error: " + str(e), "red")
-        #     pretty_print(f"Bot: {generate_ending_message()}", "green")
-        #     return
+                
+            # Process user input with the bio tagger
+            tagged_input = bio_tagger.tag_bio(user_input, next_slot)
+            tracker.update(tagged_input)
+
+            # Get the bot's next action and response
+            msg, done, next_slot = policy.next_action(done)
+            nlg_msg = msg  # Placeholder for an NLG response generator
+            pretty_print(f"Rody: {nlg_msg}", "blue")
+
+        except Exception as e:
+            pretty_print("Got an Error: " + str(e), "red")
+            pretty_print(f"Rody: {generate_ending_message()}", "green")
+            return
 
 # -------------------------------------------------
 main()

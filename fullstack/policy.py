@@ -46,7 +46,7 @@ class Policy:
                 "How challenging should the route be for you?",
                 "Can you tell me your preferred difficulty level?",
                 "Are you looking for a simple or a more challenging route?",
-                "What king of route are you looking for, light? intermediate? or expert?",
+                "What kind of route are you looking for, light? intermediate? or expert?",
             ],
             "route_length": [
                 "How long should the route be? (e.g., 5km, 10km)",
