@@ -14,12 +14,12 @@ def suprise_func(
     name,
     text,
     color_code,
-    base_speed=0.035,
+    base_speed=0.025,
     speed_variation=0.005,
-    punctuation_pause=0.6,
+    punctuation_pause=0.4,
     word_pause_multiplier=0.3,
-    sentence_pause=0.6,
-    thinking_pause=0.7,
+    sentence_pause=0.4,
+    thinking_pause=0.4,
     flush=True
 ):
     time.sleep(0.4)
