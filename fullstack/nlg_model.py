@@ -1,6 +1,7 @@
-from transformers import T5ForConditionalGeneration, AutoTokenizer
 import torch
-import os
+from transformers import T5ForConditionalGeneration, T5Tokenizer
+import warnings
+warnings.filterwarnings("ignore")
 
 class NlgModel:
     def __init__(self, model_path, tokenizer_path, device=None):
@@ -14,25 +15,33 @@ class NlgModel:
         """
         try:
             # Load the tokenizer
-            self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, use_fast=False)
+            self.tokenizer = T5Tokenizer.from_pretrained(tokenizer_path, legacy=False)
         except Exception as e:
             print(f"Error loading tokenizer: {e}")
             raise
 
         try:
             # Load the model
-            self.model = T5ForConditionalGeneration.from_pretrained(model_path)
+            self.model = T5ForConditionalGeneration.from_pretrained("t5-small")
         except Exception as e:
             print(f"Error loading model: {e}")
             raise
         
         # Resize embeddings to include new tokens (if applicable)
-        self.model.resize_token_embeddings(len(self.tokenizer))
+        self.model.resize_token_embeddings(len(self.tokenizer), mean_resizing=False)
         
         # Move model to the correct device
-        self.device = device if device else torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = self.model.to(self.device)
+        device = device or ('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device(device)
+        self.model.to(self.device)
         
+        # Load the fine-tuned weights
+        state_dict = torch.load(f"{model_path}\\pytorch_model.bin", map_location=self.device, weights_only=True)
+        self.model.load_state_dict(state_dict)
+        
+        # Set the model to evaluation mode
+        self.model.eval()
+
     def generate_response(self, input_text, max_length=50):
         """
         Generate a response from the model for a given input text.
@@ -45,11 +54,9 @@ class NlgModel:
             str: The generated response from the model.
         """
         # Tokenize the input text
-        input_ids = self.tokenizer(input_text, return_tensors="pt").input_ids.to(self.device)
-        
+        input_ids = self.tokenizer.encode(input_text, return_tensors="pt").to(self.device)
         # Generate a response
         output_ids = self.model.generate(input_ids, max_length=max_length)
-        
         # Decode the output and return the response
         response = self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
         return response
@@ -64,21 +71,16 @@ class NlgModel:
         # Get the model's response
         response = self.generate_response(input_string)
         
-        # Print the response
-        print(f"Input: {input_string}")
-        print(f"Model Response: {response}")
+        # Resutn the response
+        return response
 
 
-# Example usage:
-# Specify paths to your local files
-model_path = r"C:\Users\משתמש\OneDrive\שולחן העבודה\CS_new\third year semester 1\NLP\project\NLP_ChatBot\NLP_ChatBot\fullstack\NLG"
-tokenizer_path = r"C:\Users\משתמש\OneDrive\שולחן העבודה\CS_new\third year semester 1\NLP\project\NLP_ChatBot\NLP_ChatBot\fullstack\NLG"
+# # Specify the path to the saved model directory on your local machine
+# save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"
 
-# Initialize the model
-model = NlgModel(model_path=model_path, tokenizer_path=tokenizer_path)
+# # Initialize the model with the appropriate paths and device
+# nlgModel = NlgModel(save_directory, save_directory)
 
-# Example input
-input_text = "Find me a 10 km trail near my current location."
-
-# Get model's response
-model.respond_to_input(input_text)
+# # Test the model with an example input
+# res = nlgModel.respond_to_input("please do Find me a 10 km trail near my current location.")
+# print(res)

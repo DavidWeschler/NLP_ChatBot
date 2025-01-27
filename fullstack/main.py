@@ -1,6 +1,7 @@
 from tracker import Tracker
 from policy import Policy
 from bio_tagger import Bio_Tagger
+from nlg_model import NlgModel
 import random
 import time
 import sys
@@ -135,11 +136,14 @@ def generate_continue_message():
 # main function to run the chatbot
 def main():
     # Initialize tracker and policy
+    save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"
     tracker = Tracker()
     policy = Policy(tracker)
     bio_tagger = Bio_Tagger("../street_scraping/final_streets.txt")
+    # generator = NlgModel(save_directory, save_directory)
 
     pretty_print(botName, f"Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
+    # print(f"\033[32m{botName} Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!\033[0m")
 
     # Simulate chatbot flow
     done = False
@@ -165,10 +169,12 @@ def main():
                 
             # Process user input with the bio tagger
             tagged_input = bio_tagger.tag_bio(user_input, next_slot)
+            print(tagged_input)
             tracker.update(tagged_input)
 
             # Get the bot's next action and response
             msg, done, next_slot = policy.next_action(done)
+            # nlg_msg = generator.respond_to_input(user_input) + " " + msg  # Placeholder for an NLG response generator
             nlg_msg = msg  # Placeholder for an NLG response generator
             pretty_print(botName, f"{nlg_msg}", "blue")
 
