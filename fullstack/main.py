@@ -21,14 +21,15 @@ def suprise_func(
     thinking_pause=0.7,
     flush=True
 ):
+    phrase = random.choice(["Thinging", "Ummmmmmm", "lets see"])
     time.sleep(1)
-    for char in f"{color_code}{name} Thinking{"\033[0m"}":
+    for char in f"{color_code}{name} {phrase}{"\033[0m"}":
         print(char, end="", flush=True)
         time.sleep(0.07)
 
     for _ in range(random.randint(1, 3)):
         for dots in [".", "..", "..."]:
-            print(f"{color_code}\r{name} Thinking{dots}  {"\033[0m"}", end="", flush=True)
+            print(f"{color_code}\r{name} {phrase}{dots}  {"\033[0m"}", end="", flush=True)
             time.sleep(0.5)
     print(f"{color_code}\r{name}            {"\033[0m"}", end="", flush=True)
     print(f"{color_code}\r{name}{"\033[0m"}", end="", flush=True)
