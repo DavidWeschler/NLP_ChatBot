@@ -108,9 +108,9 @@ class Policy:
         filled_slots = self.tracker.slots
         filled_slots = {k: (v if v is not None else "") for k, v in filled_slots.items()}   # Replace 'None' with empty string
         possible_final_messages = [ 
-            f"Greate! I'll build you a {filled_slots['route_length']} km {filled_slots['difficulty']} route from {filled_slots['start_location']} {filled_slots['loca_start_num']} to {filled_slots['end_location']} {filled_slots['loca_end_num'] or ""}. Goodbye!",
-            f"Alright! I'll plan a {filled_slots['route_length']} km {filled_slots['difficulty']} route starting at {filled_slots['start_location']} {filled_slots['loca_start_num']} and ending at {filled_slots['end_location']} {filled_slots['loca_end_num']}. I'll show you the map now.",
-            f"Got it! I'll create a {filled_slots['route_length']} km {filled_slots['difficulty']} route from {filled_slots['start_location']} {filled_slots['loca_start_num']} to {filled_slots['end_location']} {filled_slots['loca_end_num']}. See you later!",
+            f"Greate! I'll build you a {filled_slots['route_length']} km {filled_slots['difficulty']} route from {filled_slots['start_location']} {filled_slots['loca_start_num']} to {filled_slots['end_location']} {filled_slots['loca_end_num'] or ""}.",
+            f"Alright! I'll plan a {filled_slots['route_length']} km {filled_slots['difficulty']} route starting at {filled_slots['start_location']} {filled_slots['loca_start_num']} and ending at {filled_slots['end_location']} {filled_slots['loca_end_num']}.",
+            f"Got it! I'll create a {filled_slots['route_length']} km {filled_slots['difficulty']} route from {filled_slots['start_location']} {filled_slots['loca_start_num']} to {filled_slots['end_location']} {filled_slots['loca_end_num']}.",
         ]
 
         answer = re.sub(r'\s+', ' ', possible_final_messages[random.randint(0, len(possible_final_messages) - 1)]).strip()

@@ -1,6 +1,6 @@
 from tracker import Tracker
 from policy import Policy
-from bio_tagger import Bio_Tagger
+from bio_tagger_t import Bio_Tagger
 from nlg_model import NlgModel
 import random
 import time
@@ -14,25 +14,24 @@ def suprise_func(
     name,
     text,
     color_code,
-    base_speed=0.035,
+    base_speed=0.025,
     speed_variation=0.005,
-    punctuation_pause=0.6,
+    punctuation_pause=0.4,
     word_pause_multiplier=0.3,
-    sentence_pause=0.6,
-    thinking_pause=0.7,
+    sentence_pause=0.4,
+    thinking_pause=0.4,
     flush=True
 ):
-    phrase = random.choice(["Thinging", "Ummmmmmm", "lets see"])
-    time.sleep(1)
-    for char in f"{color_code}{name} {phrase}{"\033[0m"}":
+    time.sleep(0.4)
+    for char in f"{color_code}{name} {"\033[0m"}":
         print(char, end="", flush=True)
         time.sleep(0.07)
 
     for _ in range(random.randint(1, 3)):
         for dots in [".", "..", "..."]:
-            print(f"{color_code}\r{name} {phrase}{dots}  {"\033[0m"}", end="", flush=True)
-            time.sleep(0.5)
-    print(f"{color_code}\r{name}            {"\033[0m"}", end="", flush=True)
+            print(f"{color_code}\r{name} {dots}  {"\033[0m"}", end="", flush=True)
+            time.sleep(0.25)
+    print(f"{color_code}\r{name}    {"\033[0m"}", end="", flush=True)
     print(f"{color_code}\r{name}{"\033[0m"}", end="", flush=True)
     time.sleep(0.35)
 
@@ -76,7 +75,7 @@ def pretty_print(name, message, color):
 
 
 def wantToContinue():
-    continueUser = ["yes", "y", "yeah", "sure", "ok", "okay", "yup", "yea", "ya", "yep", "of course", "indeed", "absolutely", "definitely", "please", "start over", "try again", "restart", "reset"]
+    continueUser = ["ok", "okay", "oka", "yes", "yeah", "sure", "ok", "okay", "yup", "yea", "yep", "of course", "indeed", "absolutely", "definitely", "please", "start over", "try again", "restart", "reset"]
     messages = [
         "I seem to be having trouble understanding you. Do you still want to continue?",
         "Apologies, I’m having difficulty following. Do you want to keep going on?",
@@ -96,6 +95,29 @@ def wantToContinue():
                 return True
     return False
 
+def isSatisfied(done):
+    satisfied = ["ok", "okay", "oka", "yes", "yeah", "sure", "ok", "okay", "yup", "yea", "ya", "yep", "of course", "indeed", "absolutely", "definitely", "please", "start over", "try again", "restart", "reset"]
+    if done:
+        messages = [
+            "Are you happy with the route I've planned for you?",
+            "Do you like the route I've planned for you?",
+            "Are you happy with the route I've planned for you?",
+            "Do you approve of the route I've planned for you?",
+            "Are you content with the route I've planned for you?",
+            "Do you find the route I've planned for you satisfactory?",
+            "Are you pleased with the route I've planned for you?",
+        ]
+        pretty_print("", f"{random.choice(messages)}", "green")
+        user_input = input(f"\033[35m{userName}").strip()
+        if user_input.lower() in satisfied:
+            return True
+        else:
+            for inp in satisfied:
+                if inp in user_input.lower():
+                    return True
+    return False
+
+
 # for finishing the bot conversation
 def generate_ending_message():
     messages = [
@@ -106,6 +128,17 @@ def generate_ending_message():
         "I couldn’t fully understand your input, but I’ll attempt to generate a route based on what’s available.",
         "My apologies for the confusion. I’ll proceed with generating a route using the information I have.",
         "I may not have understood completely, but I’ll do my best to generate a route from the provided details."
+    ]
+    return random.choice(messages)
+
+def generate_happy_ending_message():
+    messages = [
+        "I'm glad you're happy with the route I've planned for you. Enjoy your run!",
+        "I'm pleased that you like the route I've planned for you. Have a great run!",
+        "I'm happy that you approve of the route I've planned for you. Enjoy your run!",
+        "Excellent! I'm glad you're content with the route I've planned for you. Have a great run!",
+        "I'm delighted that you find the route I've planned for you satisfactory. Enjoy your run!",
+        "I'm pleased that you're happy with the route I've planned for you. Have a great run!",
     ]
     return random.choice(messages)
 
@@ -136,20 +169,20 @@ def generate_continue_message():
 # main function to run the chatbot
 def main():
     # Initialize tracker and policy
-    save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"
+    save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"  # davids dir
+    # save_directory = r"C:\Users\ronav\Downloads\gug_s_best_model_custom_seq2seq_model_with_T5"    # rons dir
     tracker = Tracker()
     policy = Policy(tracker)
     bio_tagger = Bio_Tagger("../street_scraping/final_streets.txt")
-    # generator = NlgModel(save_directory, save_directory)
+    generator = NlgModel(save_directory, save_directory)
 
-    pretty_print(botName, f"Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
-    # print(f"\033[32m{botName} Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!\033[0m")
+    pretty_print(botName, f"{generate_starting_message()}", "green")
 
-    # Simulate chatbot flow
+    # Simulate chatbot flow##
     done = False
     next_slot = None
     user_round = 0
-    max_rounds = 5  # Max rounds before asking to continue
+    max_rounds = 20  # Max rounds before asking to continue
 
     while not done:
         try:
@@ -169,14 +202,27 @@ def main():
                 
             # Process user input with the bio tagger
             tagged_input = bio_tagger.tag_bio(user_input, next_slot)
-            print(tagged_input)
             tracker.update(tagged_input)
 
             # Get the bot's next action and response
             msg, done, next_slot = policy.next_action(done)
-            # nlg_msg = generator.respond_to_input(user_input) + " " + msg  # Placeholder for an NLG response generator
-            nlg_msg = msg  # Placeholder for an NLG response generator
+
+            if not done:
+                nlg_msg = generator.respond_to_input(user_input) + " " + msg  # Placeholder for an NLG response generator
+            else:
+                nlg_msg = msg
+
             pretty_print(botName, f"{nlg_msg}", "blue")
+
+            # make sure user is satisfied with the route
+            if done:
+                if not isSatisfied(done):
+                    done = False
+                    next_slot = None
+                    pretty_print(botName, f"{generate_continue_message()}", "blue")
+                else:
+                    pretty_print(botName, f"{generate_happy_ending_message()}", "green")
+                    return
 
         except Exception as e:
             pretty_print("Got an Error: " + str(e), "red")

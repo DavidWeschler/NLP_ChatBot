@@ -156,6 +156,10 @@ class Bio_Tagger:
         return res
     
     def extract_street_names(self, sentence):
+        for phrase in self.location_phrases:
+            sentence = re.sub(r'\b[a-z]+\s' + re.escape(phrase) + r'\b', '', sentence)
+        sentence=' '.join(sentence.split())
+
         nlp = spacy.load("en_core_web_sm")
         stopwords = {"to", "from", "near", "at", "on", "in", "and"}
         regex_pattern = r'\b(?:to|from|near|at|on|in)\s((?:[a-z]+\s)*(?:\d+|street|neighborhood|avenue|district|st)|(?=\s\b(?:to|from|near|at|on|in|and)\b))'
@@ -310,11 +314,11 @@ class Bio_Tagger:
         location, _ = self.curr_location(sentence)
         if location:
             sentence = " ".join(sentence.split())
-            if sucssus or any(phrase+" "+location in sentence for phrase in ["starting at", "begin at", "start at", "beginning at", "from", "starting", "start"]):
+            if sucssus or any(phrase+" "+location in sentence for phrase in ["starting at", "begin at", "start at", "beginning at", "from", "starting"]):
                 bio_tags = self.append_to_start_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
-            elif any(phrase+" "+location in sentence for phrase in ["ending at", "finish", "finishing at", "ends at", "end at", "finishes at", "finish at", "to", "ending", "end"]) and not bio_tags['B-end_location']: 
+            elif any(phrase+" "+location in sentence for phrase in ["ending at", "finish", "finishing at", "ends at", "end at", "finishes at", "finish at", "to", "ending"]) and not bio_tags['B-end_location']: 
                 bio_tags = self.append_to_end_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
@@ -353,13 +357,15 @@ class Bio_Tagger:
                 for i, word in enumerate(s):
                     if(i<len(s)-1):
                         if (word in["from", "starting"] or " ".join(s[i-1:i+1]) in ["starting at", "begin at", "beginning at", "start at", "starts at", "begins at"]) and " ".join(s[i + 1:]).startswith(st) and not bio_tags['B-start_location']:
-                            start_sucssus = True
-                            bio_tags = self.append_to_start_location(st, bio_tags)
+                            if not start_sucssus:
+                                bio_tags=self.append_to_start_location(st, bio_tags)
                             to_remove.append(st.split())
+                            start_sucssus=True
                         elif (word in["to", "ending"] or " ".join(s[i-1:i+1]) in ["ending at", "finishing at", "ends at", "finishes at", "finish at", "end at"]) and " ".join(s[i + 1:]).startswith(st) and not bio_tags['B-end_location']:
-                            end_sucssus = True
-                            bio_tags = self.append_to_end_location(st, bio_tags)
+                            if not end_sucssus:
+                                bio_tags=self.append_to_end_location(st, bio_tags)
                             to_remove.append(st)
+                            end_sucssus=True
 
         ext_streets = [item for item in ext_streets if item not in to_remove]
 
