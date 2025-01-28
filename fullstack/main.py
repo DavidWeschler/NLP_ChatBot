@@ -136,10 +136,11 @@ def generate_continue_message():
 def main():
     # Initialize tracker and policy
     save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"
+    save_directory = r"C:\Users\ronav\Downloads\gug_s_best_model_custom_seq2seq_model_with_T5"
     tracker = Tracker()
     policy = Policy(tracker)
     bio_tagger = Bio_Tagger("../street_scraping/final_streets.txt")
-    # generator = NlgModel(save_directory, save_directory)
+    generator = NlgModel(save_directory, save_directory)
 
     pretty_print(botName, f"Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
     # print(f"\033[32m{botName} Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!\033[0m")
@@ -148,7 +149,7 @@ def main():
     done = False
     next_slot = None
     user_round = 0
-    max_rounds = 5  # Max rounds before asking to continue
+    max_rounds = 20  # Max rounds before asking to continue
 
     while not done:
         try:
@@ -173,8 +174,8 @@ def main():
 
             # Get the bot's next action and response
             msg, done, next_slot = policy.next_action(done)
-            # nlg_msg = generator.respond_to_input(user_input) + " " + msg  # Placeholder for an NLG response generator
-            nlg_msg = msg  # Placeholder for an NLG response generator
+            nlg_msg = generator.respond_to_input(user_input) + " " + msg  # Placeholder for an NLG response generator
+            #nlg_msg = msg  # Placeholder for an NLG response generator
             pretty_print(botName, f"{nlg_msg}", "blue")
 
         except Exception as e:
