@@ -30,7 +30,7 @@ def suprise_func(
     for _ in range(random.randint(1, 3)):
         for dots in [".", "..", "..."]:
             print(f"{color_code}\r{name} {dots}  {"\033[0m"}", end="", flush=True)
-            time.sleep(0.5)
+            time.sleep(0.25)
     print(f"{color_code}\r{name}    {"\033[0m"}", end="", flush=True)
     print(f"{color_code}\r{name}{"\033[0m"}", end="", flush=True)
     time.sleep(0.35)

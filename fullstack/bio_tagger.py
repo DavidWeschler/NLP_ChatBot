@@ -103,7 +103,7 @@ class Bio_Tagger:
             "your vicinity",
             "nearby",
             "in this area",
-            "from where you are",
+            "your currunt location",
 
             # GPS related
             "your gps location",
@@ -280,11 +280,11 @@ class Bio_Tagger:
         location, _ = self.curr_location(sentence)
         if location:
             sentence = " ".join(sentence.split())
-            if sucssus or any(phrase+" "+location in sentence for phrase in ["ending at", "finishing at", "finish", "ends at", "end at", "finishes at", "finish at", "to", "ending"]):
+            if sucssus or any(phrase+" "+location in sentence for phrase in ["ending at", "finishing at", "finish", "ends at", "end at", "finishes at", "finish at", "to", "ending", "end"]):
                 bio_tags = self.append_to_end_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
-            elif any(phrase+" "+location in sentence for phrase in ["starting at", "begin at", "start at", "beginning at", "from", "starting"]) and not bio_tags['B-start_location']: 
+            elif any(phrase+" "+location in sentence for phrase in ["starting at", "begin at", "start at", "beginning at", "from", "starting", "start"]) and not bio_tags['B-start_location']: 
                 bio_tags = self.append_to_start_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
@@ -310,11 +310,11 @@ class Bio_Tagger:
         location, _ = self.curr_location(sentence)
         if location:
             sentence = " ".join(sentence.split())
-            if sucssus or any(phrase+" "+location in sentence for phrase in ["starting at", "begin at", "start at", "beginning at", "from", "starting"]):
+            if sucssus or any(phrase+" "+location in sentence for phrase in ["starting at", "begin at", "start at", "beginning at", "from", "starting", "start"]):
                 bio_tags = self.append_to_start_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
-            elif any(phrase+" "+location in sentence for phrase in ["ending at", "finish", "finishing at", "ends at", "end at", "finishes at", "finish at", "to", "ending"]) and not bio_tags['B-end_location']: 
+            elif any(phrase+" "+location in sentence for phrase in ["ending at", "finish", "finishing at", "ends at", "end at", "finishes at", "finish at", "to", "ending", "end"]) and not bio_tags['B-end_location']: 
                 bio_tags = self.append_to_end_location(location, bio_tags)
                 sentence = sentence.replace(location, "")
                 sucssus = True
