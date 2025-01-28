@@ -72,7 +72,9 @@ Interact with the chatbot to plan your running route. It will guide you by askin
 
 ## Screenshots
 
-_Add screenshots of the chatbot in action here._
+Here is a screenshot of the chatbot in action:
+
+![Chatbot Screenshot](./media/chat.jpg)
 
 ---
 
@@ -85,6 +87,7 @@ _Add screenshots of the chatbot in action here._
 - **nlg_model.py**: Generates responses.
 - **req.txt**: Dependencies file.
 - **All_trials**: A folder containing the progress we made in order to build the bot
+- **media**: For screenshots and more.
 
 ---
 
