@@ -145,7 +145,7 @@ def main():
     pretty_print(botName, f"Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!", "green")
     # print(f"\033[32m{botName} Welcome the R&D route planner bot!. I can help you plan a route for your next run. Let's get started!\033[0m")
 
-    # Simulate chatbot flow
+    # Simulate chatbot flow##
     done = False
     next_slot = None
     user_round = 0
