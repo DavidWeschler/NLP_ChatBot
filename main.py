@@ -1,6 +1,6 @@
 from tracker import Tracker
 from policy import Policy
-from bio_tagger_t import Bio_Tagger
+from bio_tagger import Bio_Tagger
 from nlg_model import NlgModel
 import random
 import time
@@ -168,9 +168,15 @@ def generate_continue_message():
 
 # main function to run the chatbot
 def main():
-    # Initialize tracker and policy
-    save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"  # davids dir
+
+    # assign to the variable save_directory the path to the model, given by the user in the command line
+    if len(sys.argv) < 2:
+        print("Please provide the path to the model directory as an argument. The model can be downloaded via the following link: https://drive.google")
+        return
+    save_directory = sys.argv[1]
+    # save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"  # davids dir
     # save_directory = r"C:\Users\ronav\Downloads\gug_s_best_model_custom_seq2seq_model_with_T5"    # rons dir
+
     tracker = Tracker()
     policy = Policy(tracker)
     bio_tagger = Bio_Tagger("../street_scraping/final_streets.txt")
@@ -208,7 +214,7 @@ def main():
             msg, done, next_slot = policy.next_action(done)
 
             if not done:
-                nlg_msg = generator.respond_to_input(user_input) + " " + msg  # Placeholder for an NLG response generator
+                nlg_msg = generator.respond_to_input(user_input) + " " + msg
             else:
                 nlg_msg = msg
 
