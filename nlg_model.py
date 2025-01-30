@@ -75,12 +75,4 @@ class NlgModel:
         return response
 
 
-# # Specify the path to the saved model directory on your local machine
 # save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"
-
-# # Initialize the model with the appropriate paths and device
-# nlgModel = NlgModel(save_directory, save_directory)
-
-# # Test the model with an example input
-# res = nlgModel.respond_to_input("please do Find me a 10 km trail near my current location.")
-# print(res)
