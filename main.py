@@ -22,6 +22,9 @@ def suprise_func(
     thinking_pause=0.4,
     flush=True
 ):
+    
+    """Simulate a typing effect with pauses and thinking dots for a chatbot response."""
+
     time.sleep(0.4)
     for char in f"{color_code}{name} {"\033[0m"}":
         print(char, end="", flush=True)
@@ -56,6 +59,9 @@ def suprise_func(
     print()
 
 def pretty_print(name, message, color):
+    
+    """Print a message with a specified color and simulate a typing effect."""
+    
     colors = {
         "black": "\033[30m",
         "red": "\033[31m",
@@ -118,7 +124,6 @@ def isSatisfied(done):
     return False
 
 
-# for finishing the bot conversation
 def generate_ending_message():
     messages = [
         "I'm sorry, I seem to be having trouble understanding you. Let me try to generate a route with the details I have so far.",
@@ -174,9 +179,8 @@ def main():
         print("Please provide the path to the model directory as an argument. The model can be downloaded via the following link: https://drive.google")
         return
     save_directory = sys.argv[1]
-    # save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"  # davids dir
-    # save_directory = r"C:\Users\ronav\Downloads\gug_s_best_model_custom_seq2seq_model_with_T5"    # rons dir
 
+    # Initialize the tracker, policy, bio_tagger, and generator
     tracker = Tracker()
     policy = Policy(tracker)
     bio_tagger = Bio_Tagger("../street_scraping/final_streets.txt")
@@ -184,12 +188,12 @@ def main():
 
     pretty_print(botName, f"{generate_starting_message()}", "green")
 
-    # Simulate chatbot flow##
     done = False
     next_slot = None
     user_round = 0
-    max_rounds = 20  # Max rounds before asking to continue
+    max_rounds = 20
 
+    # Main loop for the chatbot
     while not done:
         try:
             # Get user input

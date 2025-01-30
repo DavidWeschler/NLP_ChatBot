@@ -75,7 +75,6 @@ class Policy:
                 "Where should the journey conclude?",
                 "Where do you want the route to lead to?",
             ],
-            # were not supposed to ask for these but just in case
             "loca_end_num": [
                 "What is the end location number?",
                 "Could you tell me the number for the end location?",
@@ -95,7 +94,7 @@ class Policy:
                 "What number corresponds to your starting point?",
             ],
         }
-
+        
         return random.choice(questions.get(slot, ["Could you provide more details?"]))
 
     def conclude(self, done):

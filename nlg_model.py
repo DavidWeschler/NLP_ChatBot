@@ -3,6 +3,7 @@ from transformers import T5ForConditionalGeneration, T5Tokenizer
 import warnings
 warnings.filterwarnings("ignore")
 
+
 class NlgModel:
     def __init__(self, model_path, tokenizer_path, device=None):
         """
@@ -73,6 +74,3 @@ class NlgModel:
         
         # Resutn the response
         return response
-
-
-# save_directory = r"C:\tools\nlp_bot\gug_s_best_model_custom_seq2seq_model_with_T5"
