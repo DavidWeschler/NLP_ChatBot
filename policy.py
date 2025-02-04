@@ -58,22 +58,22 @@ class Policy:
                 "What length feels comfortable for this route?",
             ],
             "start_location": [
-                "Where do you want to start?",
-                "Could you provide your starting address?",
-                "What is your preferred start point?",
-                "Can you share the location where you’d like to begin?",
-                "Where should the route begin?",
-                "Which place would you like to use as your starting point?",
-                "What’s the name or location of where you want to begin?",
+                "Where do you want to start? (from... , starting at...)",
+                "Could you provide your starting address? (from... , starting at...)",
+                "What is your preferred start point? (from... , starting at...)",
+                "Can you share the location where you’d like to begin? (from... , starting at...)",
+                "Where should the route begin? (from... , starting at...)",
+                "Which place would you like to use as your starting point? (from... , starting at...)",
+                "What’s the name or location of where you want to begin? (from... , starting at...)",
             ],
             "end_location": [
-                "Where should the route end?",
-                "What is your desired endpoint?",
-                "Could you specify where you want the route to stop?",
-                "Where do you want to finish the route?",
-                "What location would you like to mark as the endpoint?",
-                "Where should the journey conclude?",
-                "Where do you want the route to lead to?",
+                "Where should the route end? (to... , ending at...)",
+                "What is your desired endpoint? (to... , ending at...)",
+                "Could you specify where you want the route to stop? (to... , ending at...)",
+                "Where do you want to finish the route? (to... , ending at...)",
+                "What location would you like to mark as the endpoint? (to... , ending at...)",
+                "Where should the journey conclude? (to... , ending at...)",
+                "Where do you want the route to lead to? (to... , ending at...)",
             ],
             "loca_end_num": [
                 "What is the end location number?",
@@ -94,7 +94,7 @@ class Policy:
                 "What number corresponds to your starting point?",
             ],
         }
-        
+
         return random.choice(questions.get(slot, ["Could you provide more details?"]))
 
     def conclude(self, done):

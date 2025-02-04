@@ -191,7 +191,7 @@ def main():
     done = False
     next_slot = None
     user_round = 0
-    max_rounds = 20
+    max_rounds = 10
 
     # Main loop for the chatbot
     while not done:

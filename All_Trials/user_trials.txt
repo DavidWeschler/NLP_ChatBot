@@ -1,0 +1,309 @@
+
+These ate 10 real conversations with 10 different users who tried to use the chatbot. The users are people who never used the chatbot before.
+
+================================================================================= Test 1 =================================================================================
+Hadas: Hey! I'm the R&D route planner bot. I'm here to assist you in planning a route for your run. Let's begin!
+You: i would like to run near the beach 
+Hadas: i'd be happy to help you plan a beach getaway. How long should the route be? (e.g., 5km, 10km)
+You: 15k
+Hadas: i'm glad you're going to be able to do it. What level of challenge suits you best?
+You: easy 
+Hadas: i'm glad you're going to have a good time. Which place would you like to use as your starting point?
+You: the life-guard's place
+Hadas: i'm glad you're going to be a lifeguard. What is your preferred start point?
+You: im not going to be a lifeguard. id like to start my run near the life-guards boot
+Hadas: i'm not going to be a lifeguard. Where do you want to start?
+You: at the mall
+Hadas: i'm glad you're going to be shopping. Where should the route begin?
+You: my house
+Hadas: i'm glad you're going to have a good time. Where should the route begin?
+You: at the beach
+Hadas: i'm glad you're going to be there. Which place would you like to use as your starting point?
+You: the port
+Hadas: i'm glad you're going to be there. Could you provide your starting address?
+You: 
+
+
+================================================================================= Test 2 =================================================================================
+Hadas: Welcome to the R&D route planner bot! I can help you plan a route for your next run. Let's get started!
+You: I need a mountain run course to be about 3km 
+Hadas: i'm glad you're interested in a mountain run course that is about 3km long. Do you prefer an easy, medium, or hard route?
+You: medium
+Hadas: i'm happy to help you plan a trip to the u.s. Could you provide your starting address?
+You: california
+Hadas: california is a beautiful state of the art, with a rich history, rich history, and a rich history. Here are some of the best places to live in the world: 1. California, California: California What is your preferred start point?
+You: California
+Hadas: i'm glad you're going to be able to do it. Which place would you like to use as your starting point?
+You: suggest me few starting points
+Hadas: i'm glad you're interested in a starting point. Which place would you like to use as your starting point?
+You: California, California
+Hadas: California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California, California What is your preferred start point?
+You: Give me a starting point in Jerusalmen Mountains
+Hadas: This location is perfect for running activities. Let me plan a route for you! Can you share the location where you’d like to begin?
+You: Forest Ben Shemen
+Hadas: i'm glad you're going to be there. Could you provide your starting address?
+You: Shay Agnon Street
+Hadas: "Shay Agnon Street" is located in the heart of the city. The street is located in the heart of the city, just a short walk from the city center. The street is a short walk from the city center Where should the route begin?
+You: In the city center is a good starting point
+Hadas: i'm glad you're interested in the city center. Could you provide your starting address?
+You: The Nevim 37
+Hadas: The Nevim 37 is a symphony of a symphony. The Nevim 37 is a symphony of a symphony. The What’s the name or location of where you want to begin?
+You: Yafe Rom 82
+Hadas: i'm not sure. Where do you want to start?
+You: In the neighborhood of Gilo, Street: Yafe Rom 82
+Hadas: Got it! I'll create a 3 km medium route from the neighborhood of gilo street yafe rom 82 to be about 3.
+Do you find the route I've planned for you satisfactory?
+You: Yes, I very much like the route you planned for me
+Hadas: I'm pleased that you like the route I've planned for you. Have a great run!
+PS C:\Users\משתמש\OneDrive\שולחן העבודה\CS_new\third year semester 1\NLP\project\NLP_ChatBot\NLP_ChatBot> 
+
+
+================================================================================= Test 3 =================================================================================
+Hadas: Welcome to the R&D route planner bot! I can help you plan a route for your next run. Let's get started!
+You: hey, i wanna make a route for 10 k
+Hadas: i'm going to be there for a long time. Can you tell me your preferred difficulty level?
+You: i need a road run, on a flat surfce with a little bit highets changes
+Hadas: i'm glad you're going to be there. Could you specify your preferred difficulty?
+You: an easy 15 long run
+Hadas: i'm glad you're going to have a good 15 long run. What is your preferred start point?
+You: malha mall
+Hadas: Located in the heart of the city, the mall is a popular shopping destination known for its vibrant shopping scene. The mall is located in the heart of the city, just a short walk from the mall. The mall is a What’s the name or location of where you want to begin?
+You: the mall is near the sarting point, the starting point is in the train rails
+Hadas: i'm glad you're interested in the mall. Which place would you like to use as your starting point?
+You: the starting point is agodat sport hapoel 1
+Hadas: i'm glad you're going to be able to do it. Where should the route begin?
+You: near the tanahi zoo
+Hadas: i'm glad you're interested in the tanahi zoo. What is your preferred start point?
+You: the zoo
+Hadas: zoo is a beautiful zoo, with a beautiful view of the city. What’s the name or location of where you want to begin?
+You: the bibicle zoo
+Hadas: i'm glad you're interested in the bibicle zoo. Where should the route begin?
+You: in har goli
+Hadas: i'm glad you're going to be able to do it. Could you provide your starting address?
+You: har gilo
+Hadas: i'm glad you're going to be a good man. What is your preferred start point?
+You: haalon 12
+Hadas: i'm glad you're going to be happy to help you plan a trip to the world. Where should the route begin?
+You: givat ram
+Hadas: i'm glad you're going to be a good ram. Where should the route begin?
+You: in givaat ram
+Hadas: i'm glad you're going to be able to do it. Can you share the location where you’d like to begin?
+You: sakker park
+Hadas: park is a popular park in the sakker park. It is a popular park in the sakker park. The park is a popular park for tourists. What is your preferred start point?
+You: near gan sipor resterunt
+Hadas: i'm glad you're going to be there. What is your preferred start point?
+You: I want my starting point to be In Gan Sakker
+Hadas: i want to start with Gan Sakker. Can you share the location where you’d like to begin?
+You: the locatoin is gan sakker  
+Hadas: i'm glad you're going to be there. Where do you want to start?
+You: in gan sakker
+Hadas: gan sakker gan sakker gan sakker gan sakker gan sakker gan sakker gan sakker gan sakker Can you share the location where you’d like to begin?
+You: i want to begin in the trail raod
+Hadas: i'm glad you're interested in the trail raod. Which place would you like to use as your starting point?
+You: i want to start in the rail raod
+Hadas: I may not have understood completely. Would you like to keep on describing your route?
+You: near malha mall, next to the train
+Hadas: I may not have understood completely, but I’ll do my best to generate a route from the provided details.
+
+
+================================================================================= Test 4 =================================================================================
+Hadas: Hi there! I'm the R&D route planner bot. I can guide you in planning a route for your run. Let's get going!
+You: Hi lets go
+Hadas: i'm glad you're going to be there. Can you tell me the distance you want to run?
+You: Yes, the distance i want to run is 2 km  
+Hadas: i'm glad you're going to run. Could you specify your preferred difficulty?
+You: the difficulty i want to run is easy
+Hadas: i want to run a marathon. What is your preferred start point?
+You: the start point i want to run from is Mevaseret Zion 
+Hadas: i'm glad you're going to run. Where should the route begin?
+You: the route should begin in the Yasmin 52 street
+Hadas: i'm glad you're interested in the Yasmin 52 street. Where should the route end?
+You: the route should end in Beit Zait
+Hadas: i'm glad you're going to be there. What location would you like to mark as the endpoint?
+You: The entrance to Bait Zit
+Hadas: The entrance to Bait Zit Zit is located in the heart of the city. The entrance is located in the heart of the city. The entrance is located in the heart of the city, just a short walk from the city centre Where do you want the route to lead to?
+You: I dont care where the route lead
+Hadas: i'm not sure if the route is right for you. Where should the route end?
+You: the route should end in the middle of Mevaseret Zion
+Hadas: i'm glad you're going to be there. What is your desired endpoint?
+You: the desired endpoint is in the middle of Mevaseret Zion 
+Hadas: i'm glad you're interested in the endpoint. Where do you want to finish the route?
+You: the route should end in the mall of Meveseret Zion
+Hadas: i'm glad you're interested in the mall of Meveseret Zion, located in the heart of Meveseret Zion, Mexico. Where should the journey conclude?
+You: what do you mean?    
+Hadas: i mean, i mean, i mean, i mean, i mean, i mean, i mean, i mean, i mean, i mean, i mean, i mean, What is your desired endpoint?
+You: the mall in Mevaseret Zion
+Hadas: I'd be happy to help you find the mall in Mevaseret Zion, Mexico. The mall is located in the heart of the city, just a short walk from the mall. The mall is located in the heart Where do you want to finish the route?
+You: in the mall
+Hadas: i'm glad you're going to be shopping in the mall. Where should the journey conclude?
+You: the streets near the mall
+Hadas: i'm glad you're going to be shopping for a mall. Where should the route end?
+You: the route should end in the mall of mevaseret zion
+Hadas: i'm glad you're going to see the city of mevaseret zion. Could you specify where you want the route to stop?
+You: the route should stop at the mall of mevaseret zion
+Hadas: i'm glad you're going to be there. Where should the route end?
+You: the route should end in hazamir street in mevaseret zion
+Hadas: i'm glad you're going to be there. What location would you like to mark as the endpoint?
+You: the location mark ffor the endpoint should be the park near the street
+Hadas: i'm glad you're interested in the park. What is your desired endpoint?
+You: the desired endpoint is the entrance for the park 
+Hadas: i'm glad you're interested in the park. Where should the journey conclude?
+You: the journy should conclude the streets near the park
+Hadas: Apologies, I’m having difficulty following. Would you like to keep on describing your route?
+You: no
+Hadas: I’m sorry, I didn’t quite catch that. I’ll try generating a route based on the details I’ve received.
+
+
+
+================================================================================= Test 5 =================================================================================
+Hadas: Hey! I'm the R&D route planner bot. I'm here to assist you in planning a route for your run. Let's begin!
+You: ok lets do it
+Hadas: i'm glad you're going to do it. How long should the route be? (e.g., 5km, 10km)
+You: 5 km no more then that
+Hadas: i'm glad you're going to get to the airport. What level of challenge suits you best?
+You: what?
+Hadas: i'm not going to do it. Do you prefer an easy, medium, or hard route?
+You: easy one 
+Hadas: i'm glad you're going to be there. Can you share the location where you’d like to begin? (from... , starting at...)
+You: im starting from my house               
+Hadas: i'm glad you're going to be there. Where should the route begin? (from... , starting at...)
+You: from my hous to the college
+Hadas: i'm going to the college to go to college. Where do you want to start? (from... , starting at...)
+You: rout from zion square to the mamilla pool
+Hadas: i'm glad you're going to be out of zion square to the mamilla pool. What is your preferred start point? (from... , starting at...)
+You: zion square
+Hadas: i'm glad you're interested in the square. What’s the name or location of where you want to begin? (from... , starting at...)
+You: 
+
+
+================================================================================= Test 6 =================================================================================
+Hadas: Hey! I'm the R&D route planner bot. I'm here to assist you in planning a route for your run. Let's begin!
+You: i want to run 4 km. in jersulaem
+Hadas: i want to run 4 km. What is your preferred route length?
+You: i preferred 4 km route
+Hadas: i'm glad you're going to be there for a long time. Can you tell me your preferred difficulty level?
+You: i want a  medium difficulty 
+Hadas: i want a medium difficulty. Can you share the location where you’d like to begin? (from... , starting at...)
+You: i want from jaffo street to city home
+Hadas: i want to go to the city home from the jaffo street to the city home. Where should the route end? (to... , ending at...)
+You: city home
+Hadas: i'm glad you're interested in a city home. Where do you want to finish the route? (to... , ending at...)
+You: i would like to end at city home
+Hadas: i'd be happy to help you find a city home that's perfect for your travels. Where should the route end? (to... , ending at...)
+You: mahane yehuda market 
+Hadas: i'm glad you're going to be able to do it. Where should the journey conclude? (to... , ending at...)
+You: hadassah college
+Hadas: i'm glad to help you find a better college. Could you specify where you want the route to stop? (to... , ending at...)
+You: at a coffe shop  
+Hadas: i'm glad you're going to buy a coffe shop. What location would you like to mark as the endpoint? (to... , ending at...)
+You: at city hall
+Hadas: i'm glad you're interested in the city hall. Where do you want the route to lead to? (to... , ending at...)
+You: what ever you want. choose for me
+Hadas: Apologies, I’m having difficulty following. Would you like to keep on describing your route?
+You: i already told you
+Hadas: I’m sorry, I didn’t quite catch that. I’ll try generating a route based on the details I’ve received.
+
+
+================================================================================= Test 7 =================================================================================
+Hadas: Hello! I'm the R&D route planner bot. I can help you map out a route for your run. Let's start!
+You: i want to run from King George 10 to Haneviem 60   
+Hadas: i'm glad you're interested in running from King George 10 to Haneviem 60. How many kilometers do you have in mind for the route?
+You: 10 kilometers
+Hadas: i'm glad you're going to be there. What kind of route are you looking for, light? intermediate? or expert?
+You: light
+Hadas: i'm not going to get a slew. How challenging should the route be for you?
+You: hard
+Hadas: Greate! I'll build you a 10 km hard route from king george 10 to haneviem 60.
+Are you content with the route I've planned for you?
+You: yes
+Hadas: Excellent! I'm glad you're content with the route I've planned for you. Have a great run!
+
+
+================================================================================= Test 8 =================================================================================
+Hadas: Hello! I'm the R&D route planner bot. I can assist you in planning a route for your run. Let's begin!
+You: can u tell me a example of planning 
+Hadas: i'll give you a good example of planning. What length feels comfortable for this route?
+You: can u give me a mail for my teacher youram 
+Hadas: i'll give you a mail for my teacher. What is the ideal route length for you?
+You: the idea about machine leaning course 
+Hadas: i'm going to do it. Could you specify the distance you'd like to jog?
+You: 20KM
+Hadas: i'm glad you're going to be there. Are you looking for a simple or a more challenging route?
+You: give me a challenging one
+Hadas: i'm going to have to do something for you. Where do you want to start? (from... , starting at...)
+You: from pizgat zeav to ,kphu,
+Hadas: i'm glad you're going to be a good one. What’s the name or location of where you want to begin? (from... , starting at...)
+You: jerusalem to tel aviv 
+Hadas: i'm going to a tv show in a tv show. What’s the name or location of where you want to begin? (from... , starting at...)
+You: isreal to jordan 
+Hadas: jordan is a jordan that is a jordan that is a jordan that is a jordan. Which place would you like to use as your starting point? (from... , starting at...)
+You: the name of the start location israel 
+Hadas: israel is a major city in Israel. Israel is a major city in Israel. Israel is a major city in Israel. Israel is a major city in Israel. Israel is a major city in Israel. Israel is What’s the name or location of where you want to begin? (from... , starting at...)
+You: NeW york to los Angelos
+Hadas: i'm glad you're going to be there. Which place would you like to use as your starting point? (from... , starting at...)
+You: 
+
+
+================================================================================= Test 9 =================================================================================
+Hadas: Hey! I'm the R&D route planner bot. I'm here to assist you in planning a route for your run. Let's begin!
+You: can you create for me a route in maale adumim?
+Hadas: i'm glad you're interested in a route in maale adumim. What is your preferred route length?
+You: 10 km'
+Hadas: i'm not sure. What level of challenge suits you best?
+You: 2
+Hadas: i'm glad you're going to be able to do it. What kind of route are you looking for, light? intermediate? or expert?
+You: light 
+Hadas: i'm not going to get a slew. What difficulty level do you prefer? (e.g., easy, medium, hard)
+You: easy
+Hadas: i'm glad you're going to have a good time. Can you share the location where you’d like to begin? (from... , starting at...)
+You: from nachal vardit
+Hadas: i'm glad you're going to be able to do it. Where should the route begin? (from... , starting at...)
+You: from nachal vardit street in maale adumim
+Hadas: i'm glad you're going to be there. Where should the journey conclude? (to... , ending at...)
+You: ending at nachal vardit street in maale adumim
+Hadas: Alright! I'll plan a 2 km easy route starting at nachal vardit street and ending at nachal vardit street .
+Are you happy with the route I've planned for you?
+You: can you create another one with 10 km?
+Hadas: Great! Let’s keep going. Please provide the remaining details for your route.
+You: with the same starting point and ending point
+Hadas: Greate! I'll build you a 2 km easy route from nachal vardit street to nachal vardit street .
+Are you content with the route I've planned for you?
+You: no, can you creatw a new one with 10 km
+Hadas: Great! Let’s keep going. Please provide the remaining details for your route.
+You: starting at nachal vardit street in maale adumim and ending in nachal vardit street in maale adumim
+Hadas: Alright! I'll plan a 2 km easy route starting at nachal vardit street and ending at nachal vardit street .
+Do you approve of the route I've planned for you?
+You: no      
+Hadas: Okay, let’s continue. Please provide the details for your route.
+You: 10 km
+Hadas: I seem to be having trouble understanding you. Do you still want to continue?
+You: 10 kilometer
+Hadas: Sorry, I’m having some trouble understanding. Let me try to create a route with the information I have.
+
+
+================================================================================= Test 10 =================================================================================
+Hadas: Greetings! I'm the R&D route planner bot. I'm here to help you plan a route for your run. Let's start!
+You: how can i plan route?
+Hadas: i'm going to do it. How many kilometers do you have in mind for the route?
+You: 7k     
+Hadas: i'm glad you're going to get a good deal of money. How challenging should the route be for you?
+You: what do you mean
+Hadas: i mean a lot. What level of challenge suits you best?
+You: low level
+Hadas: i'm not sure. Could you specify your preferred difficulty?
+You: easy level 
+Hadas: i'm glad you're going to be there. Where should the route begin? (from... , starting at...)
+You: starting at the entrance of the city
+Hadas: i'm glad you're going to be there. Could you provide your starting address? (from... , starting at...)
+You: entrance of jerusalem
+Hadas: i'm glad to help you find a new home in the world. Could you provide your starting address? (from... , starting at...)
+You: gesher hameitarim
+Hadas: i'm glad you're going to be a good man. Where should the route begin? (from... , starting at...)
+You: i want to startfrom gesher hameitaring and run to beit hakerem
+Hadas: i want to start from gesher hameitaring and run to beit hakerem. Which place would you like to use as your starting point? (from... , starting at...)
+You: i want to start from gesher hameitaring and run to beit hakerem 
+Hadas: i'm going to bet hakerem. Can you share the location where you’d like to begin? (from... , starting at...)
+You: starting at hakerem 1
+Hadas: I may not have understood completely. Would you like to keep on describing your route?
+You: do what you think
+Hadas: Apologies, I’m having difficulty following. I’ll do my best to create a route with the information provided.
