@@ -1,6 +1,7 @@
 # ChatBot for Running Route Planning
 
-This chatbot is designed to interact with users and gather information about their desired running routes. Using Natural Language Processing (NLP), the chatbot fills specific slots to understand user preferences and generate appropriate responses.
+This chatbot is designed to interact with users and gather information about their desired running routes.
+Using Natural Language Processing (NLP), the chatbot fills specific slots to understand user preferences and generate appropriate responses.
 
 ---
 
